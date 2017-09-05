@@ -1,6 +1,6 @@
 # BSU-CS271
 
-##Team Assignment: Login Program Using Java GUI
+## Team Assignment: Login Program Using Java GUI
 Team Names:
   1. Chandra Adhikari
   2. Phil Gore
@@ -8,12 +8,12 @@ Team Names:
   4. Jorah Hinman
 Date: 9/5/2017
 
-##Included Files
+## Included Files
 
-##Building and Running
+## Building and Running
 
-##Testing
+## Testing
 
-##Known Bugs
+## Known Bugs
 
-##Resources Utilized 
+## Resources Utilized 
