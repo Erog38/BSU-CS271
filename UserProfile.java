@@ -9,7 +9,8 @@ public class UserProfile {
 	private String name;
 	private String email;
 	private String password;
-	
+	private String firstName;
+	private String lastName;
 	/**
 	 * This is the basic constructor.
 	 */
@@ -48,5 +49,21 @@ public class UserProfile {
 	
 	public String getPassword(){
 		return password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }
