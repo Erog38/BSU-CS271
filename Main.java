@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		AccountManager acctManager = new AccountManager();
+		
 		JFrame frame = new JFrame("Welcome to Profile Login!");//make new frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(new LandingPageGUI());

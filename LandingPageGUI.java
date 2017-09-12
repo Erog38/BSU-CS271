@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  *
  */
 public class LandingPageGUI extends JPanel{
-
+		
 		private JPanel mainPanel;
 		private JButton createButton;
 		private JButton loginButton;
@@ -74,13 +74,14 @@ public class LandingPageGUI extends JPanel{
 			}
 			
 			if(e.getSource().equals(loginButton)){
+				
 				System.out.println("Login button pushed!");
-				JFrame frame = new JFrame();
-				frame.getContentPane().add(new LoginGUI());
-				frame.revalidate();
-				frame.setPreferredSize(new Dimension(800, 800));
-				frame.pack();
-				frame.setVisible(true);
+				removeAll();
+				add(new LoginGUI());
+				repaint();
+				revalidate();
+				setPreferredSize(new Dimension(800, 800));
+			    setVisible(true);
 			}
 		}		
 	}
