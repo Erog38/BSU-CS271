@@ -22,6 +22,17 @@ public class AccountManager {
     	return found;
     }
     
+    public boolean verifyUserName(String userName){
+    	boolean valid = true;
+    	if(containsUsername(userName)){
+    		valid = false;
+    	}
+    	if(userName.length() > 12){
+    		valid = false;
+    	}
+    	return valid;
+    }
+    
     public boolean verifyEmail(String email){
     	return false;
     }
@@ -36,12 +47,10 @@ public class AccountManager {
     
     public boolean verifyCreateProfile(UserProfile user){
     	boolean canCreate = true;
-    	if(containsUsername(user.getName())){
+    	if(!verifyUserName(user.getName())){
     		canCreate = false;
     	}
-    	if(user.getName().length() > 12){
-    		canCreate = false;
-    	}
+    	
     	return canCreate;
     }
     
