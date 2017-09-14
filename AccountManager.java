@@ -1,10 +1,18 @@
 import java.util.Hashtable;
 
-
+/**
+ * This class stores all of the UserProfile objects, and checks for validity.
+ * 
+ * @author Jorah Hinman
+ *
+ */
 public class AccountManager {
 	
     private Hashtable<String, UserProfile> userAccount;
     
+    /**
+     * creates new AccountManager object
+     */
     public AccountManager() {
         userAccount = new Hashtable<String, UserProfile>();
     }
@@ -49,7 +57,13 @@ public class AccountManager {
     	boolean valid = true;
     	return valid;
     }
-    
+    /**
+     * Return true is password entered matches password associated with the
+     * provided username
+     * @param userName - String
+     * @param password - String
+     * @return
+     */
     public boolean verifyPassword(String userName, String password) {
        if(userName == null || password ==null){
     	   return false; 
@@ -79,4 +93,15 @@ public class AccountManager {
     	return canCreate;
     }
     
+    /**
+     * Returns true if username exists in account manager and password matches the
+     * password saved to that username. Returns false if username doesn't exist in
+     * account manager or passowrd doesn't match.
+     * @param userName
+     * @param password
+     * @return
+     */
+    public boolean verifyLogin(String userName, String password){
+    	return false;
+    }
 }
