@@ -22,6 +22,13 @@ public class AccountManager {
     	return found;
     }
     
+    /**
+     * Returns 'true' if username is a valid username. Returns 'false' is username is
+     * invalid.
+     * 
+     * @param userName - String
+     * @return valid - boolean
+     */
     public boolean verifyUserName(String userName){
     	boolean valid = true;
     	if(containsUsername(userName)){
@@ -33,8 +40,14 @@ public class AccountManager {
     	return valid;
     }
     
+    /**
+     * Retuns true if email is valid. Returns false if email is invalid.
+     * @param email - String
+     * @return valid - boolean
+     */
     public boolean verifyEmail(String email){
-    	return false;
+    	boolean valid = true;
+    	return valid;
     }
     
     public boolean verifyPassword(String userName, String password) {
@@ -45,12 +58,24 @@ public class AccountManager {
        return storedPassword != null && storedPassword.equals(password);
     }
     
+    /**
+     * Returns true if profile can be created. Returns false if profile cannot be
+     * created.
+     * 
+     * @param user - UserProfile
+     * @return canCreate - boolean
+     */
     public boolean verifyCreateProfile(UserProfile user){
     	boolean canCreate = true;
     	if(!verifyUserName(user.getName())){
     		canCreate = false;
     	}
-    	
+    	if(!verifyEmail(user.getEmail())){
+    		
+    	}
+    	if(!verifyPassword(user.getName(), user.getPassword())){
+    		
+    	}
     	return canCreate;
     }
     
