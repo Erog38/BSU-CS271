@@ -3,7 +3,7 @@ import java.util.Hashtable;
 /**
  * This class stores all of the UserProfile objects, and checks for validity.
  * 
- * @author Jorah Hinman
+ * @author Jorah Hinman, Phil Gore
  *
  */
 public class AccountManager {
@@ -23,11 +23,13 @@ public class AccountManager {
      * @return found - boolean
      */
     public boolean containsUsername(String userName){
-    	boolean found = false;
-    	if(userName != null){
-    		found = userName.equals(userAccount.get(userName));
+    	if(userName == null){
+    		return false;
     	}
-    	return found;
+    	if (userName.trim() == "") {
+    		return false;
+    	}
+    	return userAccount.contains(userName);
     }
     
     /**
@@ -54,8 +56,14 @@ public class AccountManager {
      * @return valid - boolean
      */
     public boolean verifyEmail(String email){
-    	boolean valid = true;
-    	return valid;
+    	if (email == null) {
+    		return false;
+    	} else if (email.trim() == "") {
+    		return false;
+    	} else if (!email.matches(".*@.*\\.*")) {
+    		return false;
+    	}
+    	return true;
     }
     /**
      * Return true is password entered matches password associated with the
@@ -67,7 +75,22 @@ public class AccountManager {
     public boolean verifyPassword(String userName, String password) {
        if(userName == null || password ==null){
     	   return false; 
-       }  
+       } 
+       if (userName.trim() == "" || password.trim() == "") {
+    	   return false;
+       }
+       if (password.length() < 6) {
+    	   return false;
+       }
+       if (!password.matches("[0-9]")) {
+    	   return false;
+       }
+       if (!password.matches("[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]")) {
+    	   return false;
+       }
+       if (!this.containsUsername(userName)) {
+    	   return false;
+       }
        String storedPassword = userAccount.get(userName).getPassword();
        return storedPassword != null && storedPassword.equals(password);
     }
@@ -80,28 +103,37 @@ public class AccountManager {
      * @return canCreate - boolean
      */
     public boolean verifyCreateProfile(UserProfile user){
-    	boolean canCreate = true;
     	if(!verifyUserName(user.getName())){
-    		canCreate = false;
+    		return false;
     	}
     	if(!verifyEmail(user.getEmail())){
-    		
+    		return false;
     	}
     	if(!verifyPassword(user.getName(), user.getPassword())){
-    		
+    		return false;
     	}
-    	return canCreate;
+    	return true;
     }
     
     /**
      * Returns true if username exists in account manager and password matches the
      * password saved to that username. Returns false if username doesn't exist in
-     * account manager or passowrd doesn't match.
+     * account manager or password doesn't match.
      * @param userName
      * @param password
      * @return
      */
     public boolean verifyLogin(String userName, String password){
+    	if(!verifyUserName(userName)){
+    		return false;
+    	}
+ 
+    	if(!verifyPassword(userName, password)){
+    		return false;
+    	}
+    	if (userAccount.contains(userName)) {
+    		return true;
+    	}
     	return false;
     }
 }
