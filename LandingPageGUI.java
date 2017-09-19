@@ -80,12 +80,15 @@ public class LandingPageGUI extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 
 			if(e.getSource().equals(createButton)){
-				System.out.println("Create button pushed!");
+				removeAll();
+				add(new CreateProfileGUI());
+				repaint();
+				revalidate();
+				setPreferredSize(new Dimension(800, 800));
+			    setVisible(true);
 			}
 			
 			if(e.getSource().equals(loginButton)){
-				
-				System.out.println("Login button pushed!");
 				removeAll();
 				add(new LoginGUI(profile));
 				repaint();

@@ -16,7 +16,7 @@ public class Main {
 		
 		JFrame frame = new JFrame("Welcome to Profile Login!");//make new frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new LandingPageGUI());
+		frame.getContentPane().add(new LandingPageGUI(acctManager));
 		frame.setPreferredSize(new Dimension(800, 800));
 		frame.pack();
 		frame.setVisible(true);
