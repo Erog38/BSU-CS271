@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -17,15 +19,27 @@ public class LoginGUI extends JPanel{
 	private JPanel mainPanel;
 	private JButton loginButton;
 	private ButtonListener buttonListener;
+	private JTextField userNameField;
+	private JTextField passwordField;
+	private AccountManager profile;
 	
 	public LoginGUI() {
-		
+		initInstanceVars();
+		initCenterPanel();
+	}
+	
+	public LoginGUI(AccountManager acct){
+		this();
+		setProfile(acct);
+	}
+
+	private void initInstanceVars(){
+		profile = new AccountManager();
 		setLayout(new BorderLayout());
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		add(mainPanel);
 		buttonListener = new ButtonListener();//create button listener
-		initCenterPanel();
 	}
 
 	private void initCenterPanel() {
@@ -49,7 +63,7 @@ public class LoginGUI extends JPanel{
 		JLabel userNameLabel = new JLabel("username: ");
 		userNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		userNamePanel.add(userNameLabel);
-		JTextField userNameField = new JTextField(20);
+		userNameField = new JTextField(20);
 		userNamePanel.add(userNameField);
 		return userNamePanel;
 	}
@@ -60,7 +74,7 @@ public class LoginGUI extends JPanel{
 		JLabel passwordLabel = new JLabel("password: ");
 		passwordLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		passwordPanel.add(passwordLabel);
-		JTextField passwordField = new JTextField(20);
+		passwordField = new JTextField(20);
 		passwordPanel.add(passwordField);
 		return passwordPanel;
 	}
@@ -73,15 +87,49 @@ public class LoginGUI extends JPanel{
 		loginButton.addActionListener(buttonListener);
 		return loginButton;
 	}
+	
+	public void setProfile(AccountManager acct) {
+		profile = acct;		
+	}
 
 	private class ButtonListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			boolean showPopup = false;
+			String errorName = "";
+			String errorPassword = "";
 			if(e.getSource().equals(loginButton)){
-				System.out.println("Login button pushed!");
-			}
+				if(!profile.verifyUserName(userNameField.getText()) || userNameField.getText().equals("")){
+					showPopup = true;
+					errorName = "Please enter a valid user name";
+				}
+				if(!profile.verifyPassword(userNameField.getText(), passwordField.getText()) || 
+						passwordField.getText().equals("")){
+					showPopup = true;
+					errorPassword = "Please enter a valid password";
+				}
+				if(showPopup){
+					invalidLogin(errorName, errorPassword);
+				}
+			}			
+		}
+
+		private void invalidLogin(String errorName, String errorPassword) {
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			JLabel name = new JLabel(errorName);
+			name.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+			name.setAlignmentX(Component.CENTER_ALIGNMENT);
+			JLabel password = new JLabel(errorPassword);
+			password.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+			password.setAlignmentX(Component.CENTER_ALIGNMENT);
+			panel.add(Box.createVerticalGlue());
+			panel.add(name);
+			panel.add(password);
+			panel.add(Box.createVerticalGlue());
+			int result = JOptionPane.showConfirmDialog(null, panel, "Invalid login",
+					JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE);
 		}		
 	}
 }

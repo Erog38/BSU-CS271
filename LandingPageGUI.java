@@ -30,21 +30,27 @@ public class LandingPageGUI extends JPanel{
 		private JButton createButton;
 		private JButton loginButton;
 		private ButtonListener buttonListener;
+		private AccountManager profile;
 		
 	public LandingPageGUI() {
+		initInstanceVars();
+		initCenterPanel();
+	}
+	
+	public LandingPageGUI(AccountManager acct){
+		this();
+		setProfile(acct);
+	}
+	
+	private void initInstanceVars(){
 		setLayout(new BorderLayout());
 		mainPanel = new JPanel();//panel which all of the other panel are added to
 		mainPanel.setLayout(new BorderLayout());
-		ImageIcon background = new ImageIcon("boise_state_logo_1024.jpg");
-		JLabel backgroundLabel = new JLabel();
-		backgroundLabel.setIcon(background);
-		mainPanel.add(backgroundLabel, BorderLayout.CENTER);
 		add(mainPanel);
 		buttonListener = new ButtonListener();//create button listener
-		initCenterPanel();
+		profile = new AccountManager();
 	}
-		
-		
+
 	private void initCenterPanel() {
 		JPanel centerPanel = new JPanel();//create panel & set the layout
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -63,6 +69,10 @@ public class LandingPageGUI extends JPanel{
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		
 	}
+	
+	private void setProfile(AccountManager acct) {
+		profile = acct;		
+	}
 
 	private class ButtonListener implements ActionListener{
 
@@ -77,7 +87,7 @@ public class LandingPageGUI extends JPanel{
 				
 				System.out.println("Login button pushed!");
 				removeAll();
-				add(new LoginGUI());
+				add(new LoginGUI(profile));
 				repaint();
 				revalidate();
 				setPreferredSize(new Dimension(800, 800));
