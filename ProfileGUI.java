@@ -1,34 +1,25 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- * This class displays a create profile GUI to the user.
- * 
- * @author Jorah Hinman
- */
-public class CreateProfileGUI extends JPanel{
-
+public class ProfileGUI extends JPanel{
+	
 	private JPanel mainPanel;
-	private JButton createProfileButton;
+	private JButton editProfileButton;
 	private JButton exitButton;
 	private ButtonListener buttonListener;
-	private JTextField userNameField;
-	private JTextField passwordField;
 	private AccountManager profile;
 	
-	public CreateProfileGUI() {
+	public ProfileGUI() {
 		initInstanceVars();
 	}
 	
-	public CreateProfileGUI(AccountManager acct){
+	public ProfileGUI(AccountManager acct){
 		this();
 		setProfile(acct);
 	}
@@ -46,22 +37,12 @@ public class CreateProfileGUI extends JPanel{
 		profile = acct;		
 	}
 	
-	private void initCenterPanel(){
-		
-		JPanel centerPanel = new JPanel();
-		
-		centerPanel.add(Box.createVerticalGlue());		
-		mainPanel.add(Box.createVerticalGlue());
-		mainPanel.add(centerPanel);		
-		mainPanel.add(Box.createVerticalGlue());
-	}
-	
 	private class ButtonListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			if(e.getSource().equals(createProfileButton)){
+			if(e.getSource().equals(editProfileButton)){
 
 			}		
 			if(e.getSource().equals(exitButton)){
@@ -69,4 +50,5 @@ public class CreateProfileGUI extends JPanel{
 			}
 		}
 	}
+
 }

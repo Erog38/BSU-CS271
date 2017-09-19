@@ -88,7 +88,7 @@ public class LoginGUI extends JPanel{
 		return loginButton;
 	}
 	
-	public void setProfile(AccountManager acct) {
+	private void setProfile(AccountManager acct) {
 		profile = acct;		
 	}
 
