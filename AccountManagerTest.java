@@ -1,5 +1,4 @@
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 /**
@@ -8,6 +7,25 @@ import org.junit.Test;
  */
 public class AccountManagerTest {
 
+	private AccountManager accountManager = null;
+	
+	/**
+	 * Constructor for the test class.
+	 */
+	public AccountManagerTest() {
+		super(); // calling AccountManager.java constructor
+	}
+	
+	protected void setUp() throws Exception {
+//		super.setUp();
+		accountManager = new AccountManager();
+	}
+
+	protected void tearDown() throws Exception {
+		accountManager = null;
+//		super.tearDown();
+	}
+	
 	@Test
 	public void testContainsUsername() {
 		fail("Not yet implemented");
@@ -15,6 +33,7 @@ public class AccountManagerTest {
 
 	@Test
 	public void testVerifyUserName() {
+		
 		fail("Not yet implemented");
 	}
 
