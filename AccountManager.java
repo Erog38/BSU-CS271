@@ -1,4 +1,6 @@
 import java.util.Hashtable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class stores all of the UserProfile objects, and checks for validity.
@@ -82,10 +84,15 @@ public class AccountManager {
        if (password.length() < 6) {
     	   return false;
        }
-       if (!password.matches("[0-9]")) {
+       if (!password.matches(".*\\d+.*")) {
+    	   System.out.println("Returning False, no digit.");
+    	   System.out.println(password);
     	   return false;
        }
-       if (!password.matches("[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]")) {
+       Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+       Matcher m = p.matcher(password);
+       if (!m.find()) {
+    	   System.out.println("Returning False.");
     	   return false;
        }
        if (!this.containsUsername(userName)) {
