@@ -24,7 +24,7 @@ public class CreateProfileGUI extends LoginGUI {
 	private JPanel mainPanel;
 	private JButton createProfileButton;
 	private JButton exitButton;
-	private JButton editProfileButton;
+	private JButton signupButton;
 	private ButtonListener buttonListener;
 	private JTextField userNameField;
 	private JTextField passwordField;
@@ -66,9 +66,9 @@ public class CreateProfileGUI extends LoginGUI {
 		userNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		JLabel passwordLabel = new JLabel("Password: ");
 		passwordLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-		editProfileButton = new JButton("Edit Profile");
-		editProfileButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-		editProfileButton.addActionListener(buttonListener);
+		signupButton = new JButton("Signup");
+		signupButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+		signupButton.addActionListener(buttonListener);
 		// editProfileButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		tmpMainPanel.add(firstNameLabel);
 		tmpMainPanel.add(firstName);
@@ -80,7 +80,7 @@ public class CreateProfileGUI extends LoginGUI {
 		tmpMainPanel.add(userName);
 		tmpMainPanel.add(passwordLabel);
 		tmpMainPanel.add(password);
-		tmpMainPanel.add(editProfileButton);
+		tmpMainPanel.add(signupButton);
 		createNewProfile(firstName.getText(), lastName.getText(), email.getText(), userName.getText(),
 				password.getText());
 	}
@@ -126,7 +126,7 @@ public class CreateProfileGUI extends LoginGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			if (e.getSource().equals(editProfileButton)) {
+			if (e.getSource().equals(signupButton)) {
 				System.out.println("Here");
 				String str = JOptionPane.showInputDialog("First Name:", profiles.userAccounts.get(currentlyLoggedIn).getFirstName());
 				System.out.println(str);
