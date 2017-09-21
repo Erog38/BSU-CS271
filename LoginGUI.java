@@ -115,6 +115,11 @@ public class LoginGUI extends JPanel{
 			String errorName = "";
 			String errorPassword = "";
 			if(e.getSource().equals(loginButton)){
+				if(profile.verifyUserName(userNameField.getText()) && profile.get(userNameField.getText()).getIsLocked()){
+					JOptionPane.showMessageDialog(null, "You have 3 failed login attempts. \nYour account access will be temporarially"
+							+ " suspended for 2 minutes.", null, JOptionPane.PLAIN_MESSAGE);
+					return;
+				}
 				if(!profile.verifyUserName(userNameField.getText())){
 					showPopup = true;
 					errorName = "Please enter a valid user name";
@@ -144,12 +149,15 @@ public class LoginGUI extends JPanel{
 							+ " suspended for 2 minutes.", null, JOptionPane.PLAIN_MESSAGE);
 					numFail = 0;
 					loginButton.setEnabled(false);
+					profile.get(userNameField.getText()).setIsLocked(true);
 					Timer timer = new Timer();
 					timer.schedule(new TimerTask(){
+						String user = userNameField.getText();
 						public void run(){
-							loginButton.setEnabled(true);;
+							loginButton.setEnabled(true);
+							profile.get(user).setIsLocked(false);
 						}
-					}, 120000);
+					}, 12000);
 				}
 			}
 			

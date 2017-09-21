@@ -12,6 +12,7 @@ public class UserProfile {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private boolean isLocked;
 	/**
 	 * This is the basic constructor.
 	 */
@@ -27,6 +28,7 @@ public class UserProfile {
 		email = "";
 		password = "";
 		userName = "";
+		isLocked = false;
 	}
 	
 	public void setName(String name){
@@ -64,6 +66,10 @@ public class UserProfile {
 	public String getFirstName() {
 		return firstName;
 	}
+	
+	public boolean getIsLocked(){
+		return isLocked;
+	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -75,5 +81,9 @@ public class UserProfile {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public void setIsLocked(boolean lock){
+		isLocked = lock;
 	}
 }
