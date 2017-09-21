@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,14 +26,19 @@ public class ProfileGUI extends JPanel{
 	}
 	
 	private void initInstanceVars(){
-		profile = new AccountManager();
 		setLayout(new BorderLayout());
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		add(mainPanel);
 		buttonListener = new ButtonListener();//create button listener
+		initGUI();
+		add(mainPanel);
 	}
 	
+	private void initGUI() {
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new GridLayout());
+	}
+
 	private void setProfile(AccountManager acct) {
 		profile = acct;		
 	}
@@ -43,7 +49,7 @@ public class ProfileGUI extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getSource().equals(editProfileButton)){
-
+				
 			}		
 			if(e.getSource().equals(exitButton)){
 
