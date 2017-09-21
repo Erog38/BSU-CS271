@@ -114,6 +114,12 @@ public class LoginGUI extends JPanel{
 					invalidLogin(errorName, errorPassword);
 				} else {
 					JOptionPane.showMessageDialog(null, "Welcome "+ currentlyLoggedIn + ", you are now logged in!", null, JOptionPane.PLAIN_MESSAGE);
+					removeAll();
+					add(new ProfileGUI(profile));
+					repaint();
+					revalidate();
+					setPreferredSize(new Dimension(800, 800));
+				    setVisible(true);
 				}
 			}			
 		}
