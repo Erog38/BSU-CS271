@@ -2,6 +2,8 @@ import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 /**
  * This class stores all of the UserProfile objects, and checks for validity.
  * 
@@ -10,13 +12,20 @@ import java.util.regex.Pattern;
  */
 public class AccountManager {
 	
-    protected Hashtable<String, UserProfile> userAccounts;
+    private Hashtable<String, UserProfile> userAccounts;
     
     /**
      * creates new AccountManager object
      */
     public AccountManager() {
         userAccounts = new Hashtable<String, UserProfile>();
+    }
+    
+    public void put(UserProfile account) {
+    	userAccounts.put(account.getUserName(), account);
+    }
+    public UserProfile get(String username) {
+    	return userAccounts.get(username);
     }
     
     /**
@@ -28,10 +37,7 @@ public class AccountManager {
     	if(userName == null){
     		return false;
     	}
-    	if (userName.trim() == "") {
-    		return false;
-    	}
-    	return userAccounts.contains(userName);
+    	return userAccounts.containsKey(userName);
     }
     
     /**
@@ -42,14 +48,17 @@ public class AccountManager {
      * @return valid - boolean
      */
     public boolean verifyUserName(String userName){
-    	boolean valid = true;
+    	System.out.println("Verifying username");
     	if(containsUsername(userName)){
-    		valid = false;
+    		return false;
     	}
     	if(userName.length() > 12){
-    		valid = false;
+    		return false;
     	}
-    	return valid;
+    	if(userName.trim() == "") {
+    		return false;
+    	}
+    	return true;
     }
     
     /**
@@ -62,7 +71,10 @@ public class AccountManager {
     		return false;
     	} else if (email.trim() == "") {
     		return false;
-    	} else if (!email.matches(".*@.*\\.*")) {
+    	} 
+    	 Pattern p = Pattern.compile("^(.+)@(.+)$");
+    	 Matcher m = p.matcher(email);
+    	if (!m.find()) {
     		return false;
     	}
     	return true;
@@ -77,22 +89,8 @@ public class AccountManager {
     public boolean verifyPassword(String userName, String password) {
        if(userName == null || password ==null){
     	   return false; 
-       } 
-       if (userName.trim() == "" || password.trim() == "") {
-    	   return false;
        }
-       if (password.length() < 6) {
-    	   return false;
-       }
-       if (!password.matches(".*\\d+.*")) {
-    	   System.out.println("Returning False, no digit.");
-    	   System.out.println(password);
-    	   return false;
-       }
-       Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-       Matcher m = p.matcher(password);
-       if (!m.find()) {
-    	   System.out.println("Returning False.");
+       if (!validPassword(password)) {
     	   return false;
        }
        if (!this.containsUsername(userName)) {
@@ -103,6 +101,35 @@ public class AccountManager {
     }
     
     /**
+     * Return true if the password passes all the necessary tests.
+     * 
+     * @param password - String
+     * 
+     * @return
+     */
+    public boolean validPassword(String password) {
+    	if (password.trim() == "") {
+     	   return false;
+        }
+        if (password.length() < 6) {
+     	   return false;
+        }
+        if (!password.matches(".*\\d+.*")) {
+     	   System.out.println("Returning False, no digit.");
+     	   System.out.println(password);
+     	   return false;
+        }
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(password);
+        if (!m.find()) {
+     	   System.out.println("Returning False.");
+     	   return false;
+        }	
+        return true;
+    }
+   
+    
+    /**
      * Returns true if profile can be created. Returns false if profile cannot be
      * created.
      * 
@@ -110,13 +137,16 @@ public class AccountManager {
      * @return canCreate - boolean
      */
     public boolean verifyCreateProfile(UserProfile user){
-    	if(!verifyUserName(user.getName())){
+    	if(!verifyUserName(user.getUserName())){
+    		JOptionPane.showMessageDialog(null, "Username Taken", null, 0);
     		return false;
     	}
     	if(!verifyEmailFormat(user.getEmail())){
+    		JOptionPane.showMessageDialog(null, "Invalid Email", null, 0);
     		return false;
     	}
-    	if(!verifyPassword(user.getName(), user.getPassword())){
+    	if(!validPassword(user.getPassword())){
+    		JOptionPane.showMessageDialog(null, "Invalid Password", null, 0);
     		return false;
     	}
     	return true;

@@ -1,6 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,15 +17,20 @@ import javax.swing.JTextField;
  * 
  * @author Jorah Hinman, Chandra Adhikari
  */
+@SuppressWarnings("serial")
 public class CreateProfileGUI extends LoginGUI {
 
 	private JPanel mainPanel;
 	private JButton returnButton;
 	private JButton signupButton;
 	private ButtonListener buttonListener;
-	private JTextField userNameField;
-	private JTextField passwordField;
-	private AccountManager profiles;
+	private JTextField username;
+	private JTextField password;
+	private JTextField firstName;
+	private JTextField lastName;
+	private JTextField email;
+	private JTextField passwordConfirm;
+	private AccountManager acct;
 
 	public CreateProfileGUI() {
 		initInstanceVars();
@@ -35,17 +38,17 @@ public class CreateProfileGUI extends LoginGUI {
 
 	public CreateProfileGUI(AccountManager acct) {
 		this();
-		addNewProfile(acct);
+		this.acct = acct;
 	}
 
 	private void initInstanceVars() {
-		profiles = new AccountManager();
+		acct = new AccountManager();
 		setLayout(new BorderLayout());
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		buttonListener = new ButtonListener();// create button listener
 		createSignUpPage();
 		add(mainPanel);
-		buttonListener = new ButtonListener();// create button listener
 	}
 
 	private void createSignUpPage() {
@@ -71,8 +74,8 @@ public class CreateProfileGUI extends LoginGUI {
 		JLabel userNameLabel = new JLabel("Username: ");
 		userNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		userNamePanel.add(userNameLabel);
-		JTextField userNameField = new JTextField(20);
-		userNamePanel.add(userNameField);
+		username = new JTextField(20);
+		userNamePanel.add(username);
 		
 		return userNamePanel;
 	}
@@ -83,8 +86,8 @@ public class CreateProfileGUI extends LoginGUI {
 		JLabel firstNameLabel = new JLabel("First name: ");
 		firstNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		firstNamePanel.add(firstNameLabel);
-		JTextField firstNameField = new JTextField(20);
-		firstNamePanel.add(firstNameField);
+		firstName = new JTextField(20);
+		firstNamePanel.add(firstName);
 		
 		return firstNamePanel;
 	}
@@ -95,8 +98,8 @@ public class CreateProfileGUI extends LoginGUI {
 		JLabel lastNameLabel = new JLabel("Last name: ");
 		lastNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		lastNamePanel.add(lastNameLabel);
-		JTextField lastNameField = new JTextField(20);
-		lastNamePanel.add(lastNameField);
+		lastName = new JTextField(20);
+		lastNamePanel.add(lastName);
 		
 		return lastNamePanel;
 	}
@@ -106,8 +109,8 @@ public class CreateProfileGUI extends LoginGUI {
 		JLabel emailLabel = new JLabel("Email: ");
 		emailLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		emailPanel.add(emailLabel);
-		JTextField emailField = new JTextField(20);
-		emailPanel.add(emailField);
+		email= new JTextField(20);
+		emailPanel.add(email);
 		
 		return emailPanel;
 	}
@@ -118,13 +121,13 @@ public class CreateProfileGUI extends LoginGUI {
 		JLabel passwordLabel = new JLabel("Password: ");
 		passwordLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		passwordPanel.add(passwordLabel);
-		passwordField = new JTextField(20);
-		passwordPanel.add(passwordField);
+		password = new JTextField(20);
+		passwordPanel.add(password);
 		JLabel confirmLabel = new JLabel("Confirm password: ");
 		confirmLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		passwordPanel.add(confirmLabel);
-		JTextField confirmField = new JTextField(20);
-		passwordPanel.add(confirmField);
+		passwordConfirm = new JTextField(20);
+		passwordPanel.add(passwordConfirm);
 		return passwordPanel;
 	}
 	
@@ -144,7 +147,7 @@ public class CreateProfileGUI extends LoginGUI {
 		return buttonPanel;
 	}
 
-	private void createNewProfile(String first, String last, String email, String usrName, String pass) {
+	private boolean createNewProfile(String first, String last, String email, String usrName, String pass) {
 		UserProfile newUser = new UserProfile();
 		newUser.setFirstName(first);
 		newUser.setLastName(last);
@@ -152,22 +155,18 @@ public class CreateProfileGUI extends LoginGUI {
 		newUser.setUserName(usrName);
 		newUser.setPassword(pass);
 		if (verifyProfileInformation(newUser)) {
-			profiles.userAccounts.put(usrName, newUser);
+			acct.put(newUser);
+			return true;
 		} else {
-			// print what piece of information is invalid.
+			return false;
 		}
 	}
 
 	private boolean verifyProfileInformation(UserProfile newUser) {
-		if (profiles.verifyCreateProfile(newUser)
-				&& profiles.verifyLogin(newUser.getUserName(), newUser.getPassword())) {
+		if (acct.verifyCreateProfile(newUser)) {
 			return true;
 		}
 		return false;
-	}
-
-	private void addNewProfile(AccountManager acct) {
-		profiles = acct;
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -176,9 +175,17 @@ public class CreateProfileGUI extends LoginGUI {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource().equals(signupButton)) {
-				System.out.println("Here");
-				String str = JOptionPane.showInputDialog("First Name:", profiles.userAccounts.get(currentlyLoggedIn).getFirstName());
-				System.out.println(str);
+				
+				if (password.getText().equals(passwordConfirm.getText())) {
+				
+					if(createNewProfile(firstName.getText(), lastName.getText(), email.getText(), username.getText(),
+							password.getText())) {
+						JOptionPane.showMessageDialog(null, "Account Created! Welcome!", null, 0);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Password Mismatch", null, 0);
+
+				}
 			}
 			if (e.getSource().equals(returnButton)) {
 				removeAll();
