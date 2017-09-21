@@ -54,6 +54,7 @@ public class LandingPageGUI extends JPanel{
 	private void initCenterPanel() {
 		JPanel centerPanel = new JPanel();//create panel & set the layout
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+		ImageIcon img = new ImageIcon("BSULogo.jpg");
 		createButton = new JButton("Create Profile!");
 		loginButton = new JButton("Login");
 		createButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
@@ -81,7 +82,7 @@ public class LandingPageGUI extends JPanel{
 
 			if(e.getSource().equals(createButton)){
 				removeAll();
-				add(new CreateProfileGUI());
+				add(new CreateProfileGUI9());
 				repaint();
 				revalidate();
 				setPreferredSize(new Dimension(800, 800));
