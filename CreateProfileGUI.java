@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -45,7 +46,6 @@ public class CreateProfileGUI extends LoginGUI {
 		acct = new AccountManager();
 		setLayout(new BorderLayout());
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		buttonListener = new ButtonListener();// create button listener
 		createSignUpPage();
 		add(mainPanel);
@@ -54,17 +54,14 @@ public class CreateProfileGUI extends LoginGUI {
 	private void createSignUpPage() {
 		
 		JPanel centerPanel = new JPanel();
-		
-		centerPanel.add(Box.createVerticalGlue());	
-		mainPanel.add(Box.createVerticalGlue());
-		centerPanel.add(initUserNamePanel());
+		centerPanel.setLayout(new GridLayout(6,1));
 		centerPanel.add(initFirstNamePanel());
 		centerPanel.add(initLastNamePanel());
+		centerPanel.add(initUserNamePanel());
 		centerPanel.add(initEmailPanel());
 		centerPanel.add(initPasswordPanel());
 		centerPanel.add(initButtonPanel());
-		mainPanel.add(centerPanel);		
-		mainPanel.add(Box.createVerticalGlue());
+		mainPanel.add(centerPanel);
 	}
 	
 	private JPanel initUserNamePanel(){
@@ -82,7 +79,6 @@ public class CreateProfileGUI extends LoginGUI {
 	
 	private JPanel initFirstNamePanel(){
 		JPanel firstNamePanel = new JPanel();
-		
 		JLabel firstNameLabel = new JLabel("First name: ");
 		firstNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		firstNamePanel.add(firstNameLabel);
@@ -118,6 +114,7 @@ public class CreateProfileGUI extends LoginGUI {
 	private JPanel initPasswordPanel(){
 		
 		JPanel passwordPanel = new JPanel();
+		passwordPanel.setLayout(new GridLayout(6, 1));
 		JLabel passwordLabel = new JLabel("Password: ");
 		passwordLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		passwordPanel.add(passwordLabel);
