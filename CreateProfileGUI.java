@@ -181,6 +181,12 @@ public class CreateProfileGUI extends LoginGUI {
 					if(createNewProfile(firstName.getText(), lastName.getText(), email.getText(), username.getText(),
 							password.getText())) {
 						JOptionPane.showMessageDialog(null, "Account Created! Welcome!", null, JOptionPane.PLAIN_MESSAGE);
+						removeAll();
+						add(new LoginGUI(acct));
+						repaint();
+						revalidate();
+						setPreferredSize(new Dimension(800, 800));
+					    setVisible(true);
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Password Mismatch", null, JOptionPane.PLAIN_MESSAGE);
