@@ -166,7 +166,8 @@ public class AccountManager {
     		return false;
     	}
     	if(!validPassword(user.getPassword())){
-    		JOptionPane.showMessageDialog(null, "Invalid Password", null, JOptionPane.PLAIN_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Invalid Password must be at least 6 characters long and contain a number"
+    				+ " and a special character", null, JOptionPane.PLAIN_MESSAGE);
     		return false;
     	}
     	return true;

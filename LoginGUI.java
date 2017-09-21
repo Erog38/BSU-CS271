@@ -18,11 +18,14 @@ public class LoginGUI extends JPanel{
 
 	private JPanel mainPanel;
 	private JButton loginButton;
+	private JButton returnButton;
 	private ButtonListener buttonListener;
 	private JTextField userNameField;
 	private JTextField passwordField;
 	protected String currentlyLoggedIn;
 	private AccountManager profile;
+	
+	private int numFail;
 	
 	public LoginGUI() {
 		initInstanceVars();
@@ -40,6 +43,7 @@ public class LoginGUI extends JPanel{
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		add(mainPanel);
 		buttonListener = new ButtonListener();//create button listener
+		numFail = 0;
 	}
 
 	private void initCenterPanel() {
@@ -49,7 +53,7 @@ public class LoginGUI extends JPanel{
 		centerPanel.add(Box.createVerticalGlue());
 		centerPanel.add(initNamePanel());
 		centerPanel.add(initPasswordPanel());
-		centerPanel.add(initLoginButton());
+		centerPanel.add(initButtonPanel());
 		centerPanel.add(Box.createVerticalGlue());
 		
 		mainPanel.add(Box.createVerticalGlue());
@@ -79,13 +83,22 @@ public class LoginGUI extends JPanel{
 		return passwordPanel;
 	}
 	
-	private JButton initLoginButton(){
+	private JPanel initButtonPanel(){
+		
+		JPanel buttonPanel = new JPanel();
 		
 		loginButton = new JButton("Login");
 		loginButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		returnButton = new JButton("Return");
+		returnButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+		returnButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loginButton.addActionListener(buttonListener);
-		return loginButton;
+		returnButton.addActionListener(buttonListener);
+		buttonPanel.add(loginButton);
+		buttonPanel.add(returnButton);
+		
+		return buttonPanel;
 	}
 	
 	private void setProfile(AccountManager acct) {
@@ -107,6 +120,9 @@ public class LoginGUI extends JPanel{
 				if(!profile.verifyPassword(userNameField.getText(), passwordField.getText())){
 					showPopup = true;
 					errorPassword = "Please enter a valid password";
+					if(profile.verifyUserName(userNameField.getText())){
+						numFail++;
+					}
 				} else {
 					currentlyLoggedIn = userNameField.getText();
 				}
@@ -121,7 +137,21 @@ public class LoginGUI extends JPanel{
 					setPreferredSize(new Dimension(800, 800));
 				    setVisible(true);
 				}
-			}			
+				if(numFail == 3){
+					JOptionPane.showMessageDialog(null, "You have 3 failed login attempts. \nYour account access will be temporarially"
+							+ " suspended for 2 minutes.", null, JOptionPane.PLAIN_MESSAGE);
+					numFail = 0;
+				}
+			}
+			
+			if (e.getSource().equals(returnButton)) {
+				removeAll();
+				add(new LandingPageGUI(profile));
+				repaint();
+				revalidate();
+				setPreferredSize(new Dimension(800, 800));
+			    setVisible(true);
+			}
 		}
 
 		private void invalidLogin(String errorName, String errorPassword) {
