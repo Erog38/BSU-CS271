@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
  */
 public class AccountManager {
 	
-    protected Hashtable<String, UserProfile> userAccount;
+    protected Hashtable<String, UserProfile> userAccounts;
     
     /**
      * creates new AccountManager object
      */
     public AccountManager() {
-        userAccount = new Hashtable<String, UserProfile>();
+        userAccounts = new Hashtable<String, UserProfile>();
     }
     
     /**
@@ -31,7 +31,7 @@ public class AccountManager {
     	if (userName.trim() == "") {
     		return false;
     	}
-    	return userAccount.contains(userName);
+    	return userAccounts.contains(userName);
     }
     
     /**
@@ -98,7 +98,7 @@ public class AccountManager {
        if (!this.containsUsername(userName)) {
     	   return false;
        }
-       String storedPassword = userAccount.get(userName).getPassword();
+       String storedPassword = userAccounts.get(userName).getPassword();
        return storedPassword != null && storedPassword.equals(password);
     }
     
@@ -138,7 +138,7 @@ public class AccountManager {
     	if(!verifyPassword(userName, password)){
     		return false;
     	}
-    	if (userAccount.contains(userName)) {
+    	if (userAccounts.contains(userName)) {
     		return true;
     	}
     	return false;

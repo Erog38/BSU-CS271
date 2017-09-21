@@ -50,7 +50,7 @@ public class AccountManagerTest {
 
 	private void setUpAccountManager() {
 		accountManager = new AccountManager();
-		accountManager.userAccount.put(userProfile.getUserName(), userProfile);
+		accountManager.userAccounts.put(userProfile.getUserName(), userProfile);
 	}
 
 	private void createProfile(UserProfile tmpUser, String first, String last, String email, String pass, String usrName) {
@@ -65,7 +65,7 @@ public class AccountManagerTest {
 	protected void tearDown() throws Exception {
 		accountManager = null;
 		userProfile = null;
-		accountManager.userAccount.clear();
+		accountManager.userAccounts.clear();
 	}
 	
 	@Test
