@@ -157,7 +157,7 @@ public class LoginGUI extends JPanel{
 							loginButton.setEnabled(true);
 							profile.get(user).setIsLocked(false);
 						}
-					}, 12000);
+					}, 120000);
 				}
 			}
 			
