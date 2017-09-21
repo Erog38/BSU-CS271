@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class AccountManager {
 	
-    private Hashtable<String, UserProfile> userAccount;
+    protected Hashtable<String, UserProfile> userAccount;
     
     /**
      * creates new AccountManager object
@@ -57,7 +57,7 @@ public class AccountManager {
      * @param email - String
      * @return valid - boolean
      */
-    public boolean verifyEmail(String email){
+    public boolean verifyEmailFormat(String email){
     	if (email == null) {
     		return false;
     	} else if (email.trim() == "") {
@@ -113,7 +113,7 @@ public class AccountManager {
     	if(!verifyUserName(user.getName())){
     		return false;
     	}
-    	if(!verifyEmail(user.getEmail())){
+    	if(!verifyEmailFormat(user.getEmail())){
     		return false;
     	}
     	if(!verifyPassword(user.getName(), user.getPassword())){

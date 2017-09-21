@@ -8,6 +8,7 @@ public class UserProfile {
 	//Instance variables!
 	private String name;
 	private String email;
+	private String userName;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -25,6 +26,7 @@ public class UserProfile {
 		name = "";
 		email = "";
 		password = "";
+		userName = "";
 	}
 	
 	public void setName(String name){
@@ -35,6 +37,14 @@ public class UserProfile {
 		this.email = email;
 	}
 
+	public void setUserName(String usrName){
+		this.userName = usrName;
+	}
+	
+	public String getUserName(){
+		return userName;
+	}
+	
 	public void setPassword(String pswrd){
 		this.password = pswrd;
 	}
