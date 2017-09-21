@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -141,6 +143,13 @@ public class LoginGUI extends JPanel{
 					JOptionPane.showMessageDialog(null, "You have 3 failed login attempts. \nYour account access will be temporarially"
 							+ " suspended for 2 minutes.", null, JOptionPane.PLAIN_MESSAGE);
 					numFail = 0;
+					loginButton.setEnabled(false);
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask(){
+						public void run(){
+							loginButton.setEnabled(true);;
+						}
+					}, 120000);
 				}
 			}
 			
