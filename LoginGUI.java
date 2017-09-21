@@ -21,6 +21,7 @@ public class LoginGUI extends JPanel{
 	private ButtonListener buttonListener;
 	private JTextField userNameField;
 	private JTextField passwordField;
+	protected String currentlyLoggedIn;
 	private AccountManager profile;
 	
 	public LoginGUI() {
@@ -108,6 +109,8 @@ public class LoginGUI extends JPanel{
 						passwordField.getText().equals("")){
 					showPopup = true;
 					errorPassword = "Please enter a valid password";
+				} else {
+					currentlyLoggedIn = userNameField.getText();
 				}
 				if(showPopup){
 					invalidLogin(errorName, errorPassword);

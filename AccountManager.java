@@ -1,4 +1,6 @@
 import java.util.Hashtable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class stores all of the UserProfile objects, and checks for validity.
@@ -8,13 +10,13 @@ import java.util.Hashtable;
  */
 public class AccountManager {
 	
-    private Hashtable<String, UserProfile> userAccount;
+    protected Hashtable<String, UserProfile> userAccounts;
     
     /**
      * creates new AccountManager object
      */
     public AccountManager() {
-        userAccount = new Hashtable<String, UserProfile>();
+        userAccounts = new Hashtable<String, UserProfile>();
     }
     
     /**
@@ -29,7 +31,7 @@ public class AccountManager {
     	if (userName.trim() == "") {
     		return false;
     	}
-    	return userAccount.contains(userName);
+    	return userAccounts.contains(userName);
     }
     
     /**
@@ -55,7 +57,7 @@ public class AccountManager {
      * @param email - String
      * @return valid - boolean
      */
-    public boolean verifyEmail(String email){
+    public boolean verifyEmailFormat(String email){
     	if (email == null) {
     		return false;
     	} else if (email.trim() == "") {
@@ -82,16 +84,21 @@ public class AccountManager {
        if (password.length() < 6) {
     	   return false;
        }
-       if (!password.matches("[0-9]")) {
+       if (!password.matches(".*\\d+.*")) {
+    	   System.out.println("Returning False, no digit.");
+    	   System.out.println(password);
     	   return false;
        }
-       if (!password.matches("[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]")) {
+       Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+       Matcher m = p.matcher(password);
+       if (!m.find()) {
+    	   System.out.println("Returning False.");
     	   return false;
        }
        if (!this.containsUsername(userName)) {
     	   return false;
        }
-       String storedPassword = userAccount.get(userName).getPassword();
+       String storedPassword = userAccounts.get(userName).getPassword();
        return storedPassword != null && storedPassword.equals(password);
     }
     
@@ -106,7 +113,7 @@ public class AccountManager {
     	if(!verifyUserName(user.getName())){
     		return false;
     	}
-    	if(!verifyEmail(user.getEmail())){
+    	if(!verifyEmailFormat(user.getEmail())){
     		return false;
     	}
     	if(!verifyPassword(user.getName(), user.getPassword())){
@@ -131,7 +138,7 @@ public class AccountManager {
     	if(!verifyPassword(userName, password)){
     		return false;
     	}
-    	if (userAccount.contains(userName)) {
+    	if (userAccounts.contains(userName)) {
     		return true;
     	}
     	return false;

@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 public class LandingPageGUI extends JPanel{
 		
 		private JPanel mainPanel;
-		private JButton createButton;
+		private JButton createProfileButton;
 		private JButton loginButton;
 		private ButtonListener buttonListener;
 		private AccountManager profile;
@@ -54,17 +54,16 @@ public class LandingPageGUI extends JPanel{
 	private void initCenterPanel() {
 		JPanel centerPanel = new JPanel();//create panel & set the layout
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
-		ImageIcon img = new ImageIcon("BSULogo.jpg");
-		createButton = new JButton("Create Profile!");
+		createProfileButton = new JButton("Create Profile!");
 		loginButton = new JButton("Login");
-		createButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+		createProfileButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		loginButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-		createButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		createProfileButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		createButton.addActionListener(buttonListener);
+		createProfileButton.addActionListener(buttonListener);
 		loginButton.addActionListener(buttonListener);
 		centerPanel.add(Box.createVerticalGlue());
-		centerPanel.add(createButton);
+		centerPanel.add(createProfileButton);
 		centerPanel.add(loginButton);
 		centerPanel.add(Box.createVerticalGlue());
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
@@ -80,9 +79,9 @@ public class LandingPageGUI extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			if(e.getSource().equals(createButton)){
+			if(e.getSource().equals(createProfileButton)){
 				removeAll();
-				add(new CreateProfileGUI9());
+				add(new CreateProfileGUI());
 				repaint();
 				revalidate();
 				setPreferredSize(new Dimension(800, 800));
