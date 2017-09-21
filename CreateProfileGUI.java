@@ -208,24 +208,19 @@ public class CreateProfileGUI extends LoginGUI {
 		if (firstName.getText().equals("")) {
 			hasBlank = true;
 			JOptionPane.showMessageDialog(null, "First name is required.", null, JOptionPane.PLAIN_MESSAGE);
-		}
-		if (firstName.getText().equals("")) {
+		} else if (firstName.getText().equals("")) {
 			hasBlank = true;
 			JOptionPane.showMessageDialog(null, "Last name is required.", null, JOptionPane.PLAIN_MESSAGE);
-		}
-		if (username.getText().equals("")) {
+		} else if (username.getText().equals("")) {
 			hasBlank = true;
 			JOptionPane.showMessageDialog(null, "Username is required.", null, JOptionPane.PLAIN_MESSAGE);
-		}
-		if (email.getText().equals("")) {
+		} else if (email.getText().equals("")) {
 			hasBlank = true;
 			JOptionPane.showMessageDialog(null, "email is required.", null, JOptionPane.PLAIN_MESSAGE);
-		}
-		if (password.getText().equals("")) {
+		} else if (password.getText().equals("")) {
 			hasBlank = true;
 			JOptionPane.showMessageDialog(null, "Password is required.", null, JOptionPane.PLAIN_MESSAGE);
-		}
-		if (passwordConfirm.getText().equals("")) {
+		} else if (passwordConfirm.getText().equals("")) {
 			hasBlank = true;
 			JOptionPane.showMessageDialog(null, "Confirm Password is required.", null, JOptionPane.PLAIN_MESSAGE);
 		}
