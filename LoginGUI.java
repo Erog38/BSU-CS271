@@ -35,7 +35,6 @@ public class LoginGUI extends JPanel{
 	}
 
 	private void initInstanceVars(){
-		profile = new AccountManager();
 		setLayout(new BorderLayout());
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -101,12 +100,11 @@ public class LoginGUI extends JPanel{
 			String errorName = "";
 			String errorPassword = "";
 			if(e.getSource().equals(loginButton)){
-				if(!profile.verifyUserName(userNameField.getText()) || userNameField.getText().equals("")){
+				if(!profile.verifyUserName(userNameField.getText())){
 					showPopup = true;
 					errorName = "Please enter a valid user name";
 				}
-				if(!profile.verifyPassword(userNameField.getText(), passwordField.getText()) || 
-						passwordField.getText().equals("")){
+				if(!profile.verifyPassword(userNameField.getText(), passwordField.getText())){
 					showPopup = true;
 					errorPassword = "Please enter a valid password";
 				} else {
@@ -114,6 +112,8 @@ public class LoginGUI extends JPanel{
 				}
 				if(showPopup){
 					invalidLogin(errorName, errorPassword);
+				} else {
+					JOptionPane.showMessageDialog(null, "Welcome "+ currentlyLoggedIn + ", you are now logged in!", null, JOptionPane.PLAIN_MESSAGE);
 				}
 			}			
 		}

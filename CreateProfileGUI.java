@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 /**
  * This class displays a create profile GUI to the user.
  * 
- * @author Jorah Hinman, Chandra Adhikari
+ * @author Jorah Hinman, Chandra Adhikari, Phil Gore
  */
 @SuppressWarnings("serial")
 public class CreateProfileGUI extends LoginGUI {
@@ -180,16 +180,15 @@ public class CreateProfileGUI extends LoginGUI {
 				
 					if(createNewProfile(firstName.getText(), lastName.getText(), email.getText(), username.getText(),
 							password.getText())) {
-						JOptionPane.showMessageDialog(null, "Account Created! Welcome!", null, 0);
+						JOptionPane.showMessageDialog(null, "Account Created! Welcome!", null, JOptionPane.PLAIN_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Password Mismatch", null, 0);
-
+					JOptionPane.showMessageDialog(null, "Password Mismatch", null, JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 			if (e.getSource().equals(returnButton)) {
 				removeAll();
-				add(new LandingPageGUI());
+				add(new LandingPageGUI(acct));
 				repaint();
 				revalidate();
 				setPreferredSize(new Dimension(800, 800));

@@ -49,6 +49,26 @@ public class AccountManager {
      */
     public boolean verifyUserName(String userName){
     	System.out.println("Verifying username");
+    	if(!containsUsername(userName)){
+    		return false;
+    	}
+    	if(userName.length() > 12){
+    		return false;
+    	}
+    	if(userName.trim() == "") {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    /**
+     * Returns 'true' if username is a valid new username. Returns 'false' is username is
+     * invalid.
+     * 
+     * @param userName - String
+     * @return valid - boolean
+     */
+    private boolean validNewUserName(String userName){
     	if(containsUsername(userName)){
     		return false;
     	}
@@ -137,16 +157,16 @@ public class AccountManager {
      * @return canCreate - boolean
      */
     public boolean verifyCreateProfile(UserProfile user){
-    	if(!verifyUserName(user.getUserName())){
-    		JOptionPane.showMessageDialog(null, "Username Taken", null, 0);
+    	if(!validNewUserName(user.getUserName())){
+    		JOptionPane.showMessageDialog(null, "Username Taken", null, JOptionPane.PLAIN_MESSAGE);
     		return false;
     	}
     	if(!verifyEmailFormat(user.getEmail())){
-    		JOptionPane.showMessageDialog(null, "Invalid Email", null, 0);
+    		JOptionPane.showMessageDialog(null, "Invalid Email", null, JOptionPane.PLAIN_MESSAGE);
     		return false;
     	}
     	if(!validPassword(user.getPassword())){
-    		JOptionPane.showMessageDialog(null, "Invalid Password", null, 0);
+    		JOptionPane.showMessageDialog(null, "Invalid Password", null, JOptionPane.PLAIN_MESSAGE);
     		return false;
     	}
     	return true;
