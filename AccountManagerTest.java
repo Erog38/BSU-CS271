@@ -13,7 +13,7 @@ public class AccountManagerTest {
 	//User info to check for assertFalse()
 	private String badFirstName = "Thomas";
 	private String badLastName = "Rice";
-	private String badEmail = "thomasrice@test.com";
+	private String badEmail = "thomasrice";
 	private String badUserName = "thomasrice";
 	private String badPassword = "TheGre@tPass1";
 	
@@ -25,7 +25,7 @@ public class AccountManagerTest {
 	private String goodUserName = "johngreen";
 	
 	//Invalid input structures
-	private String invalidEmail1 = "email@email_email", invalidEmail2 = "@email@email";
+	private String invalidEmail1 = "myemail@", invalidEmail2 = "@email@email";
 	private String invalidUserName1 = "testU", invalidUserName2 = "thisismyusername";
 	private String invalidPassword1 = "pass", invalidPassword2 = "Thisismyp@ssw0rd1";
 	
@@ -44,6 +44,7 @@ public class AccountManagerTest {
 	}
 	
 	protected void setUp() throws Exception {
+		userProfile = new UserProfile();
 		createProfile(userProfile, goodFirstName, goodLastName, goodEmail, goodPassword, goodUserName);
 		setUpAccountManager();
 	}
@@ -54,7 +55,6 @@ public class AccountManagerTest {
 	}
 
 	private void createProfile(UserProfile tmpUser, String first, String last, String email, String pass, String usrName) {
-		tmpUser = new UserProfile();
 		tmpUser.setFirstName(first);
 		tmpUser.setLastName(last);
 		tmpUser.setEmail(email);
@@ -104,24 +104,24 @@ public class AccountManagerTest {
 		tmp = accountManager.verifyPassword(badUserName, invalidPassword2);
 		assertFalse( "Specified username (" + badUserName + " and " + invalidPassword2 + ") are invalid." ,tmp);
 	}
-
-	@Test
-	public void testVerifyCreateProfile() {
-		boolean tmp = accountManager.verifyCreateProfile(userProfile);
-		assertTrue("", tmp);
-		UserProfile up = null;
-		tmp = accountManager.verifyCreateProfile(up);
-		assertFalse( "Specified profile (" + up + ") is invalid." ,tmp);
-		UserProfile badProfile = new UserProfile();
-		createProfile(badProfile, "TestFirst", "TestLast", "Test@email*email", "Thisisalongpassword", "Thisisalongusername");
-	}
-
-	@Test
-	public void testVerifyLogin() {
-		boolean tmp = accountManager.verifyLogin(goodUserName, goodPassword);
-		assertTrue("", tmp);
-		tmp = accountManager.verifyLogin(goodUserName, badPassword);
-		assertFalse( "Specified username (" + goodUserName + " and " + badPassword + ") are invalid." ,tmp);
-	}
+//
+//	@Test
+//	public void testVerifyCreateProfile() {
+//		boolean tmp = accountManager.verifyCreateProfile(userProfile);
+//		assertTrue("", tmp);
+//		UserProfile up = null;
+//		tmp = accountManager.verifyCreateProfile(up);
+//		assertFalse( "Specified profile (" + up + ") is invalid." ,tmp);
+//		UserProfile badProfile = new UserProfile();
+//		createProfile(badProfile, "TestFirst", "TestLast", "Test@email*email", "Thisisalongpassword", "Thisisalongusername");
+//	}
+//
+//	@Test
+//	public void testVerifyLogin() {
+//		boolean tmp = accountManager.verifyLogin(goodUserName, goodPassword);
+//		assertTrue("", tmp);
+//		tmp = accountManager.verifyLogin(goodUserName, badPassword);
+//		assertFalse( "Specified username (" + goodUserName + " and " + badPassword + ") are invalid." ,tmp);
+//	}
 
 }
