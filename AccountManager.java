@@ -94,7 +94,7 @@ public class AccountManager {
 		} else if (email.trim() == "") {
 			return false;
 		} 
-		Pattern p = Pattern.compile("^(.+)@(.+)$");
+		Pattern p = Pattern.compile("^[^@](.+)@(.+)$");
 		Matcher m = p.matcher(email);
 		if (!m.find()) { 
 			return false;
