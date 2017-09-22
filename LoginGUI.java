@@ -145,7 +145,7 @@ public class LoginGUI extends JPanel{
 				    setVisible(true);
 				}
 				if(numFail == 3){
-					JOptionPane.showMessageDialog(null, "You have 3 failed login attempts. \nYour account access will be temporarially"
+					JOptionPane.showMessageDialog(null, "You have 3 failed login attempts. \nYour account has been temporarially"
 							+ " suspended for 2 minutes.", null, JOptionPane.PLAIN_MESSAGE);
 					numFail = 0;
 					loginButton.setEnabled(false);

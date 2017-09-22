@@ -51,7 +51,6 @@ public class AccountManager {
 	 * @return valid - boolean
 	 */
 	public boolean verifyUserName(String userName){
-		System.out.println("Verifying username");
 		if(!containsUsername(userName)){
 			return false;
 		}
