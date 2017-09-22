@@ -138,7 +138,7 @@ public class LoginGUI extends JPanel{
 				} else {
 					JOptionPane.showMessageDialog(null, "Welcome "+ currentlyLoggedIn + ", you are now logged in!", null, JOptionPane.PLAIN_MESSAGE);
 					removeAll();
-					add(new ProfileGUI(profile));
+					add(new ProfileGUI(profile, currentlyLoggedIn));
 					repaint();
 					revalidate();
 					setPreferredSize(new Dimension(800, 800));
