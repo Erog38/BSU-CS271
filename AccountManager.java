@@ -97,7 +97,7 @@ public class AccountManager {
 		} 
 		Pattern p = Pattern.compile("^(.+)@(.+)$");
 		Matcher m = p.matcher(email);
-		if (!m.find()) {
+		if (!m.find()) { 
 			return false;
 		}
 		return true;
