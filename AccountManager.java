@@ -48,7 +48,6 @@ public class AccountManager {
      * @return valid - boolean
      */
     public boolean verifyUserName(String userName){
-    	System.out.println("Verifying username");
     	if(!containsUsername(userName)){
     		return false;
     	}
@@ -135,14 +134,11 @@ public class AccountManager {
      	   return false;
         }
         if (!password.matches(".*\\d+.*")) {
-     	   System.out.println("Returning False, no digit.");
-     	   System.out.println(password);
      	   return false;
         }
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(password);
         if (!m.find()) {
-     	   System.out.println("Returning False.");
      	   return false;
         }	
         return true;
