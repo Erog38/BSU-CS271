@@ -52,9 +52,9 @@ public class CreateProfileGUI extends LoginGUI {
 	}
 
 	private void createSignUpPage() {
-
+		
 		JPanel centerPanel = new JPanel();
-		centerPanel.setLayout(new GridLayout(6, 1));
+		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		centerPanel.add(initFirstNamePanel());
 		centerPanel.add(initLastNamePanel());
 		centerPanel.add(initUserNamePanel());
@@ -63,57 +63,57 @@ public class CreateProfileGUI extends LoginGUI {
 		centerPanel.add(initButtonPanel());
 		mainPanel.add(centerPanel);
 	}
-
-	private JPanel initUserNamePanel() {
-
+	
+	private JPanel initUserNamePanel(){
+		
 		JPanel userNamePanel = new JPanel();
-
+		userNamePanel.setLayout(new GridLayout(2,1));
 		JLabel userNameLabel = new JLabel("Username: ");
 		userNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		userNamePanel.add(userNameLabel);
 		username = new JTextField(20);
 		userNamePanel.add(username);
-
+		
 		return userNamePanel;
 	}
-
-	private JPanel initFirstNamePanel() {
+	
+	private JPanel initFirstNamePanel(){
 		JPanel firstNamePanel = new JPanel();
+		firstNamePanel.setLayout(new GridLayout(2,1));
 		JLabel firstNameLabel = new JLabel("First name: ");
 		firstNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		firstNamePanel.add(firstNameLabel);
 		firstName = new JTextField(20);
 		firstNamePanel.add(firstName);
-
+		
 		return firstNamePanel;
 	}
-
-	private JPanel initLastNamePanel() {
+	
+	private JPanel initLastNamePanel(){
 		JPanel lastNamePanel = new JPanel();
-
+		lastNamePanel.setLayout(new GridLayout(2,1));
 		JLabel lastNameLabel = new JLabel("Last name: ");
 		lastNameLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		lastNamePanel.add(lastNameLabel);
 		lastName = new JTextField(20);
 		lastNamePanel.add(lastName);
-
+		
 		return lastNamePanel;
 	}
-
-	private JPanel initEmailPanel() {
+	private JPanel initEmailPanel(){
 		JPanel emailPanel = new JPanel();
-
+		emailPanel.setLayout(new GridLayout(2,1));
 		JLabel emailLabel = new JLabel("Email: ");
 		emailLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		emailPanel.add(emailLabel);
-		email = new JTextField(20);
+		email= new JTextField(20);
 		emailPanel.add(email);
-
+		
 		return emailPanel;
 	}
-
-	private JPanel initPasswordPanel() {
-
+	
+	private JPanel initPasswordPanel(){
+		
 		JPanel passwordPanel = new JPanel();
 		passwordPanel.setLayout(new GridLayout(6, 1));
 		JLabel passwordLabel = new JLabel("Password: ");
@@ -128,11 +128,11 @@ public class CreateProfileGUI extends LoginGUI {
 		passwordPanel.add(passwordConfirm);
 		return passwordPanel;
 	}
-
-	private JPanel initButtonPanel() {
-
+	
+	private JPanel initButtonPanel(){
+		
 		JPanel buttonPanel = new JPanel();
-
+		
 		signupButton = new JButton("Create Profile!");
 		signupButton.addActionListener(buttonListener);
 		signupButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
@@ -141,7 +141,7 @@ public class CreateProfileGUI extends LoginGUI {
 		returnButton.addActionListener(buttonListener);
 		returnButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		buttonPanel.add(returnButton);
-
+		
 		return buttonPanel;
 	}
 
@@ -161,7 +161,7 @@ public class CreateProfileGUI extends LoginGUI {
 	}
 
 	private boolean verifyProfileInformation(UserProfile newUser) {
-		if (acct.verifyCreateProfile(newUser)) {
+		if (acct.verifyCreateProfile(newUser, "")) {
 			return true;
 		}
 		return false;
@@ -219,7 +219,7 @@ public class CreateProfileGUI extends LoginGUI {
 		}
 		if (email.getText().equals("")) {
 			hasBlank = true;
-			JOptionPane.showMessageDialog(null, "email is required.", null, JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Email is required.", null, JOptionPane.PLAIN_MESSAGE);
 		}
 		if (password.getText().equals("")) {
 			hasBlank = true;
