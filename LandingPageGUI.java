@@ -81,7 +81,7 @@ public class LandingPageGUI extends JPanel{
 
 			if(e.getSource().equals(createProfileButton)){
 				removeAll();
-				add(new CreateProfileGUI());
+				add(new CreateProfileGUI(profile));
 				repaint();
 				revalidate();
 				setPreferredSize(new Dimension(800, 800));
