@@ -72,9 +72,11 @@ public class AccountManager {
 	 */
 	private boolean validNewUserName(String userName){
 		if(containsUsername(userName)){
+			JOptionPane.showMessageDialog(null, "Username Taken", null, JOptionPane.PLAIN_MESSAGE);
 			return false;
 		}
 		if(userName.length() > 12){
+			JOptionPane.showMessageDialog(null, "Invalid Username", null, JOptionPane.PLAIN_MESSAGE);
 			return false;
 		}
 		if(userName.trim() == "") {
@@ -162,7 +164,6 @@ public class AccountManager {
 
 		if (!username.equals(user.getUserName())) {
 			if(!validNewUserName(user.getUserName())){
-				JOptionPane.showMessageDialog(null, "Username Taken", null, JOptionPane.PLAIN_MESSAGE);
 				return false;
 			}
 		}
