@@ -1,33 +1,28 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 /**
  * This class is the first place a user starts when using the Profile Login program.
  * 
- * @author Jorah Hinman
+ * @author Chandra Adhikari, Jorah Hinman, Phil Gore
  *
  */
+@SuppressWarnings("serial")
 public class LandingPageGUI extends JPanel{
 		
 		private JPanel mainPanel;
 		private JButton createProfileButton;
+		private JLabel whiteSpace;
 		private JButton loginButton;
 		private ButtonListener buttonListener;
 		private AccountManager profile;
@@ -56,6 +51,7 @@ public class LandingPageGUI extends JPanel{
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		createProfileButton = new JButton("Create Profile!");
 		loginButton = new JButton("Login");
+		whiteSpace = new JLabel("           ");
 		createProfileButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		loginButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		createProfileButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -64,10 +60,10 @@ public class LandingPageGUI extends JPanel{
 		loginButton.addActionListener(buttonListener);
 		centerPanel.add(Box.createVerticalGlue());
 		centerPanel.add(createProfileButton);
+		centerPanel.add(whiteSpace);
 		centerPanel.add(loginButton);
 		centerPanel.add(Box.createVerticalGlue());
-		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		
+		mainPanel.add(centerPanel, BorderLayout.CENTER);	
 	}
 	
 	private void setProfile(AccountManager acct) {

@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 /**
  * This class stores all of the UserProfile objects, and checks for validity.
  * 
- * @author Jorah Hinman, Phil Gore
+ * @author Jorah Hinman, Phil Gore, Chandra Adhikari
  *
  */
 public class AccountManager {
@@ -22,6 +22,7 @@ public class AccountManager {
 	}
 
 	public void put(UserProfile account) {
+		if(account == null) return;
 		userAccounts.put(account.getUserName(), account);
 	}
 	public UserProfile get(String username) {
@@ -111,7 +112,7 @@ public class AccountManager {
 	 * @return
 	 */
 	public boolean verifyPassword(String userName, String password) {
-		if(userName == null || password ==null){
+		if(userName == null || password == null){
 			return false; 
 		}
 		if (!validPassword(password)) {
@@ -161,7 +162,9 @@ public class AccountManager {
 	 * @return canCreate - boolean
 	 */
 	public boolean verifyCreateProfile(UserProfile user, String username){
-
+		if (user == null) {
+			return false;
+		}
 		if (!username.equals(user.getUserName())) {
 			if(!validNewUserName(user.getUserName())){
 				return false;
@@ -191,11 +194,10 @@ public class AccountManager {
 		if(!verifyUserName(userName)){
 			return false;
 		}
-
 		if(!verifyPassword(userName, password)){
 			return false;
 		}
-		if (userAccounts.contains(userName)) {
+		if (userAccounts.containsKey(userName) && userAccounts.get(userName).getUserName().equals(userName)) {
 			return true;
 		}
 		return false;

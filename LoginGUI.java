@@ -10,12 +10,16 @@ import java.util.TimerTask;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Chandra Adhikari, Jorah Hinman, Phil Gore
+ *
+ */
+@SuppressWarnings("serial")
 public class LoginGUI extends JPanel{
 
 	private JPanel mainPanel;
@@ -184,7 +188,7 @@ public class LoginGUI extends JPanel{
 			panel.add(name);
 			panel.add(password);
 			panel.add(Box.createVerticalGlue());
-			int result = JOptionPane.showConfirmDialog(null, panel, "Invalid login",
+			JOptionPane.showConfirmDialog(null, panel, "Invalid login",
 					JOptionPane.CLOSED_OPTION, JOptionPane.PLAIN_MESSAGE);
 		}		
 	}

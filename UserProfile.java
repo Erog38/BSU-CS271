@@ -1,7 +1,7 @@
 /**
  * This class creates a user profile object which stores all of the necessary variables for a user profile.
  * 
- * @author Jorah Hinman
+ * @author Chandra Adhikari, Jorah Hinman, Phil Gore
  *
  */
 public class UserProfile {

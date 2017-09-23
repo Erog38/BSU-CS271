@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -163,8 +162,9 @@ public class CreateProfileGUI extends LoginGUI {
 	private boolean verifyProfileInformation(UserProfile newUser) {
 		if (acct.verifyCreateProfile(newUser, "")) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	private class ButtonListener implements ActionListener {
