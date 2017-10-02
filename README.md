@@ -24,7 +24,7 @@ Team Members Names:
         $ javac *.java
   Then to run the program simply run the following command from the directory 
   containing Main.class file.
-  		$ java Main
+  	$ java Main
 
 ## Testing
 
